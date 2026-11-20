@@ -76,7 +76,7 @@ class Requisition:
             self.approval_reference = "Not available"
 
     def respond_requisition(self):
-        # Let a manager approve, reject, or leave a pending requisition pending
+        # Let a manager approve reject or leave a pending requisition pending
         if self.status == "Pending":
             print("-")
             print(f"Requisition ID: {self.requisition_id} | Staff: {self.staff_name} | Total: ${self.total}")
@@ -130,3 +130,40 @@ def display_statistics(requisitions):
     print(f"Total approved requisitions: {approved_count}")
     print(f"Total pending requisitions: {pending_count}")
     print(f"Total not approved requisitions: {not_approved_count}")
+
+# Main program
+requisition_counter = 10000
+requisitions = []
+
+print("Purchase Requisition System")
+
+while True:
+    print("-")
+    requisition_counter += 1
+    req = Requisition(requisition_counter)
+    req.staff_info()
+    req.requisitions_details()
+    req.requisition_approval()
+    req.display_requisition()
+    requisitions.append(req)
+
+    another_req = input("Add another requisition? (yes/no): ").lower()
+    while another_req != "yes" and another_req != "no":
+        print("Please enter yes or no.")
+        another_req = input("Add another requisition? (yes/no): ").lower()
+
+    if another_req == "no":
+        break
+
+# Manager review for any pending requisitions
+for req in requisitions:
+    if req.status == "Pending":
+        req.respond_requisition()
+
+# Show all requisitions and final statistics
+print("-")
+print("All Requisitions")
+for req in requisitions:
+    req.display_requisition()
+
+display_statistics(requisitions)
