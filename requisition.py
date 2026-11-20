@@ -74,3 +74,21 @@ class Requisition:
         else:
             self.status = "Pending"
             self.approval_reference = "Not available"
+
+    def respond_requisition(self):
+        # Let a manager approve, reject, or leave a pending requisition pending
+        if self.status == "Pending":
+            print("")
+            print(f"Requisition ID: {self.requisition_id} | Staff: {self.staff_name} | Total: ${self.total}")
+            decision = input("Manager decision (approve/reject/pending): ").lower()
+
+            while decision != "approve" and decision != "reject" and decision != "pending":
+                print("Please enter approve, reject, or pending.")
+                decision = input("Manager decision (approve/reject/pending): ").lower()
+
+            if decision == "approve":
+                self.status = "Approved"
+                self.approval_reference = self.staff_id + str(self.requisition_id)[-3:]
+            elif decision == "reject":
+                self.status = "Not approved"
+                self.approval_reference = "Not available"
