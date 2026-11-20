@@ -66,3 +66,11 @@ class Requisition:
         for item in self.items:
             self.total += item[1]
 
+    def requisition_approval(self):
+        # Approve automatically if total is below $500
+        if self.total < 500:
+            self.status = "Approved"
+            self.approval_reference = self.staff_id + str(self.requisition_id)[-3:]
+        else:
+            self.status = "Pending"
+            self.approval_reference = "Not available"
