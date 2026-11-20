@@ -92,3 +92,18 @@ class Requisition:
             elif decision == "reject":
                 self.status = "Not approved"
                 self.approval_reference = "Not available"
+
+    def display_requisition(self):
+        # Show all details of this requisition
+        print("")
+        print("Requisition Summary")
+        print(f"Date: {self.date}")
+        print(f"Requisition ID: {self.requisition_id}")
+        print(f"Staff ID: {self.staff_id}")
+        print(f"Staff Name: {self.staff_name}")
+        print("Items:")
+        for item in self.items:
+            print(f"  - {item[0]}: ${item[1]}")
+        print(f"Total: ${self.total}")
+        print(f"Status: {self.status}")
+        print(f"Approval Reference Number: {self.approval_reference}")
