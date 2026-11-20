@@ -78,7 +78,7 @@ class Requisition:
     def respond_requisition(self):
         # Let a manager approve, reject, or leave a pending requisition pending
         if self.status == "Pending":
-            print("")
+            print("-")
             print(f"Requisition ID: {self.requisition_id} | Staff: {self.staff_name} | Total: ${self.total}")
             decision = input("Manager decision (approve/reject/pending): ").lower()
 
@@ -95,7 +95,7 @@ class Requisition:
 
     def display_requisition(self):
         # Show all details of this requisition
-        print("")
+        print("-")
         print("Requisition Summary")
         print(f"Date: {self.date}")
         print(f"Requisition ID: {self.requisition_id}")
@@ -107,3 +107,26 @@ class Requisition:
         print(f"Total: ${self.total}")
         print(f"Status: {self.status}")
         print(f"Approval Reference Number: {self.approval_reference}")
+
+def display_statistics(requisitions):
+    # Count and display requisition totals by status
+    total_count = 0
+    approved_count = 0
+    pending_count = 0
+    not_approved_count = 0
+
+    for req in requisitions:
+        total_count += 1
+        if req.status == "Approved":
+            approved_count += 1
+        elif req.status == "Pending":
+            pending_count += 1
+        else:
+            not_approved_count += 1
+
+    print("-")
+    print("Requisition Statistics")
+    print(f"Total requisitions submitted: {total_count}")
+    print(f"Total approved requisitions: {approved_count}")
+    print(f"Total pending requisitions: {pending_count}")
+    print(f"Total not approved requisitions: {not_approved_count}")
